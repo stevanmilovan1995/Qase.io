@@ -2,12 +2,6 @@ import { test } from "../page-objects/testHelper";
 import { expect } from "@playwright/test";
 
 test.describe("Navigator test", () => {
-  test.beforeEach(async ({ qase }) => {
-    await qase.loginPage.mailField.fill("qasetest74@gmail.com");
-    await qase.loginPage.passwordField.fill("Qasetestqa123!");
-    await qase.loginPage.rememberMeCheckBox.check();
-    await qase.loginPage.signInBtn.click();
-  });
   test("Home Page navigation test", async ({ page, qase }) => {
     await qase.navigator.appsNavItem.click();
     await expect(page).toHaveURL("https://app.qase.io/apps");
@@ -44,12 +38,5 @@ test.describe("Navigator test", () => {
     await expect(page).toHaveURL("https://app.qase.io/projects");
     await qase.navigator.appsNavItem.click();
     await expect(page).toHaveURL("https://app.qase.io/apps");
-  });
-  test.afterEach(async ({ page }) => {
-    await page.context().clearCookies();
-    await page.evaluate(() => {
-      localStorage.clear();
-      sessionStorage.clear();
-    });
   });
 });
